@@ -104,7 +104,7 @@
    <widget class="QPushButton" name="saveButton">
     <property name="geometry">
      <rect>
-      <x>310</x>
+      <x>230</x>
       <y>110</y>
       <width>75</width>
       <height>31</height>
@@ -128,6 +128,22 @@
     </property>
     <property name="text">
      <string>Powerd By rajIT Ltd.</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="okButton">
+    <property name="geometry">
+     <rect>
+      <x>310</x>
+      <y>110</y>
+      <width>75</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(116, 116, 116)</string>
+    </property>
+    <property name="text">
+     <string>Ok</string>
     </property>
    </widget>
   </widget>

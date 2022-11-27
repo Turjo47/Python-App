@@ -38,7 +38,6 @@ class InputWindow(QMainWindow):
         Api=self.Api_lineEdit.text()
         self.okButton.clicked.connect(self.passinfo)
         self.saveButton.clicked.connect(self.add_database)
-        self.add_database()
         # self.serverwindow = ServerWindow()
     def passinfo(self):
         widget.setFixedSize(400,450)
@@ -46,10 +45,10 @@ class InputWindow(QMainWindow):
         widget.setCurrentIndex(widget.currentIndex()-1)
         # self.serverwindow.displayinfo()
     def add_database(self):
-        try:
+        
             con = sqlite3.connect('attendence.bd')
             cur = con.cursor()
-            users= cur.execute('''CREATE TABLE is not exists infos(
+            users= cur.execute('''CREATE TABLE if not exists infos(
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             ip TEXT NOT NULL,
             port TEXT NOT NULL,
@@ -57,15 +56,14 @@ class InputWindow(QMainWindow):
             )''')
             # # con.commit()
             sql= """INSERT INTO infos(ip,port,api) VALUES (?,?,?)"""
-            cur.execute(sql, users)
+            cur.execute(sql)
             cur.execute("SELECT rowwid,* FORM infos")
             items = cur.fetchall()
             for item in items:
                 print(items)
             con.commit()
             con.close()
-        except:
-            pass
+        
 #main
 app = QApplication(sys.argv)
 widget= QtWidgets.QStackedWidget()

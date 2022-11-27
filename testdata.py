@@ -8,5 +8,5 @@ cur.execute('''CREATE TABLE IF NOT EXISTS
             ( name TEXT,
             number TEXT
                 ''')
-cur.execute('''INSERT INTO tables('turjo','1235235151')''')
+cur.execute('''INSERT INTO tables('raha','12876543')''')
 con.commit

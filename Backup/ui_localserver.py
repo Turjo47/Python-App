@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'f:\Laptop\RajIT Project\attendence app\Python App\localserver.ui'
+# Form implementation generated from reading ui file 'f:\Laptop\RajIT Project\attendence app\Python App\Backup\localserver.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.7
 #
@@ -60,27 +60,27 @@ class Ui_LocalserverWindow(object):
         self.actionConfigaration.setObjectName("actionConfigaration")
         self.actionAdd_New = QtWidgets.QAction(LocalserverWindow)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("f:\\Laptop\\RajIT Project\\attendence app\\Python App\\fugue-icons-3.5.6/icons/plus-button.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("f:\\Laptop\\RajIT Project\\attendence app\\Python App\\Backup\\fugue-icons-3.5.6/icons/plus-button.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.actionAdd_New.setIcon(icon)
         self.actionAdd_New.setObjectName("actionAdd_New")
         self.actionSave = QtWidgets.QAction(LocalserverWindow)
         icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap("f:\\Laptop\\RajIT Project\\attendence app\\Python App\\fugue-icons-3.5.6/icons/document-sub.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon1.addPixmap(QtGui.QPixmap("f:\\Laptop\\RajIT Project\\attendence app\\Python App\\Backup\\fugue-icons-3.5.6/icons/document-sub.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.actionSave.setIcon(icon1)
         self.actionSave.setObjectName("actionSave")
         self.actionSave_As = QtWidgets.QAction(LocalserverWindow)
         icon2 = QtGui.QIcon()
-        icon2.addPixmap(QtGui.QPixmap("f:\\Laptop\\RajIT Project\\attendence app\\Python App\\fugue-icons-3.5.6/icons/document-share.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon2.addPixmap(QtGui.QPixmap("f:\\Laptop\\RajIT Project\\attendence app\\Python App\\Backup\\fugue-icons-3.5.6/icons/document-share.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.actionSave_As.setIcon(icon2)
         self.actionSave_As.setObjectName("actionSave_As")
         self.actionConfigaration_2 = QtWidgets.QAction(LocalserverWindow)
         icon3 = QtGui.QIcon()
-        icon3.addPixmap(QtGui.QPixmap("f:\\Laptop\\RajIT Project\\attendence app\\Python App\\fugue-icons-3.5.6/icons/hammer-screwdriver.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon3.addPixmap(QtGui.QPixmap("f:\\Laptop\\RajIT Project\\attendence app\\Python App\\Backup\\fugue-icons-3.5.6/icons/hammer-screwdriver.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.actionConfigaration_2.setIcon(icon3)
         self.actionConfigaration_2.setObjectName("actionConfigaration_2")
         self.actionVersion_2 = QtWidgets.QAction(LocalserverWindow)
         icon4 = QtGui.QIcon()
-        icon4.addPixmap(QtGui.QPixmap("f:\\Laptop\\RajIT Project\\attendence app\\Python App\\fugue-icons-3.5.6/icons/paper-plane--pencil.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon4.addPixmap(QtGui.QPixmap("f:\\Laptop\\RajIT Project\\attendence app\\Python App\\Backup\\fugue-icons-3.5.6/icons/paper-plane--pencil.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.actionVersion_2.setIcon(icon4)
         self.actionVersion_2.setObjectName("actionVersion_2")
         self.menuFile.addAction(self.actionAdd_New)

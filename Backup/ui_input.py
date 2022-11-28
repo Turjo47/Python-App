@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'f:\Laptop\RajIT Project\attendence app\Python App\input.ui'
+# Form implementation generated from reading ui file 'f:\Laptop\RajIT Project\attendence app\Python App\Backup\input.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.7
 #

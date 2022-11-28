@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'f:\Laptop\RajIT Project\attendence app\Python App\input.ui'
+# Form implementation generated from reading ui file 'input.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.7
 #
@@ -74,3 +74,13 @@ class Ui_InputWindow(object):
         self.saveButton.setText(_translate("InputWindow", "Save"))
         self.label_4.setText(_translate("InputWindow", "Powerd By rajIT Ltd."))
         self.okButton.setText(_translate("InputWindow", "Ok"))
+
+
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    InputWindow = QtWidgets.QMainWindow()
+    ui = Ui_InputWindow()
+    ui.setupUi(InputWindow)
+    InputWindow.show()
+    sys.exit(app.exec_())

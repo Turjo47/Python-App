@@ -42,6 +42,9 @@
     <property name="styleSheet">
      <string notr="true">background-color: rgb(255, 255, 255)</string>
     </property>
+    <property name="inputMask">
+     <string/>
+    </property>
     <property name="text">
      <string/>
     </property>

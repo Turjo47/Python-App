@@ -2,7 +2,7 @@ import os
 import sys 
 import sqlite3
 from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import QMainWindow,QApplication,QLabel,QPushButton,QTextBrowser,QMenuBar,QMenu,QAction,QStatusBar,QLineEdit,QWidget,QDialog,QTableWidget
+from PyQt5.QtWidgets import QMainWindow,QApplication,QLabel,QPushButton,QTextBrowser,QMenuBar,QMenu,QAction,QStatusBar,QLineEdit,QWidget,QDialog,QTableWidget,QTableWidgetItem
 from PyQt5.uic import loadUi
 
 
@@ -11,56 +11,46 @@ class ServerWindow(QMainWindow):
         super(ServerWindow,self).__init__()
         loadUi("localserver.ui",self)
         self.actionAdd_New.triggered.connect(self.displayinfo)
+        self.syncButton.clicked.connect(self.loaddata)
         self.displayinfo()
-        
     def displayinfo(self):
         widget.setFixedSize(400,180)
-        # con = sqlite3.connect('attendence.bd')
-        # cur = con.cursor()
-        # cur.execute('''CREATE TABLE IF NOT EXISTS infos(
-        #     id INTEGER PRIMARY KEY AUTOINCREMENT,
-        #     ip TEXT,
-        #     port TEXT,
-        #     api TEXT
-        #     )''')
-        # con.commit()
         widget.setCurrentIndex(widget.currentIndex()+1)
         self.show()
-    
-class InputWindow(QMainWindow):       
+    def loaddata(self):
+        con = sqlite3.connect('attendence.bd')
+        cur= con.cursor()
+        sqlquery ="SELECT rowid,* FROM infos"
+        self.tableWidget.setRowCount(50)
+        tablerow = 0 
+        for row in cur.execute(sqlquery):
+            self.tableWidget.setItem(tablerow, 1, QtWidgets.QTableWidgetItem(row[1]))
+            self.tableWidget.setItem(tablerow, 2, QtWidgets.QTableWidgetItem(row[2]))
+            self.tableWidget.setItem(tablerow, 3, QtWidgets.QTableWidgetItem(row[3]))
+            tablerow+=1
+            
+class InputWindow(QMainWindow):
     def __init__(self):
         super(InputWindow,self).__init__()
         loadUi("input.ui",self)
-        self.serverwindow=ServerWindow()
-        self.okButton.clicked.connect(self.passinfo)
         self.saveButton.clicked.connect(self.add_database)
-        # Ip = self.Ip_lineEdit.text()
-        # Port =self.Port_lineEdit.text()
-        # Api =self.Api_lineEdit.text()
+        self.okButton.clicked.connect(self.passinfo)
         
-        # self.serverwindow = ServerWindow()
     def passinfo(self):
         widget.setFixedSize(400,450)
         widget.setCurrentIndex(widget.currentIndex()-1)
-        # self.serverwindow.displayinfo()
     def add_database(self):
-        
+        ip = self.Ip_lineEdit.text()
+        port =self.Port_lineEdit.text()
+        api =self.Api_lineEdit.text()
         con = sqlite3.connect('attendence.bd')
         cur = con.cursor()
-        users= cur.execute('''CREATE TABLE if not exists infos(
-        
-        ip TEXT ,
-        port TEXT ,
-        api TEXT 
-        )''')
-        # # con.commit()
-        cur.execute("INSERT INTO infos (ip,port,api) VALUES('WORKED','4412','42232')")
-        # cur.execute("SELECT rowwid,* FORM infos")
-        # items = cur.fetchall()
-        # for item in items:
-        #     print(items)
+        users= cur.execute('''CREATE TABLE if not exists infos(Ip TEXT ,Port TEXT ,Api TEXT)''')
+        cur.execute("INSERT INTO infos (Ip,Port,Api) VALUES(?,?,?)",(ip,port,api))
         con.commit()
         con.close
+    
+        
 if __name__ == '__main__':        
 #main
     app = QApplication(sys.argv)

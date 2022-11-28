@@ -2,7 +2,7 @@ import os
 import sys 
 import sqlite3
 from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import QMainWindow,QApplication,QLabel,QPushButton,QTextBrowser,QMenuBar,QMenu,QAction,QStatusBar,QLineEdit,QWidget,QDialog,QTableWidget
+from PyQt5.QtWidgets import QMainWindow,QApplication,QLabel,QPushButton,QTextBrowser,QMenuBar,QMenu,QAction,QStatusBar,QLineEdit,QWidget,QDialog,QTableWidget,QTableWidgetItem
 from PyQt5.uic import loadUi
 
 
@@ -11,20 +11,28 @@ class ServerWindow(QMainWindow):
         super(ServerWindow,self).__init__()
         loadUi("localserver.ui",self)
         self.actionAdd_New.triggered.connect(self.displayinfo)
-        
+        self.syncButton.clicked.connect(self.loaddata)
         self.displayinfo()
-        
     def displayinfo(self):
         widget.setFixedSize(400,180)
         widget.setCurrentIndex(widget.currentIndex()+1)
         self.show()
-    
-class InputWindow(QMainWindow):       
+    def loaddata(self):
+        con = sqlite3.connect('attendence.bd')
+        cur= con.cursor()
+        sqlquery ="SELECT rowid,* FROM infos"
+        self.tableWidget.setRowCount(50)
+        tablerow = 0 
+        for row in cur.execute(sqlquery):
+            self.tableWidget.setItem(tablerow, 1, QtWidgets.QTableWidgetItem(row[1]))
+            self.tableWidget.setItem(tablerow, 2, QtWidgets.QTableWidgetItem(row[2]))
+            self.tableWidget.setItem(tablerow, 3, QtWidgets.QTableWidgetItem(row[3]))
+            tablerow+=1
+            
+class InputWindow(QMainWindow):
     def __init__(self):
         super(InputWindow,self).__init__()
         loadUi("input.ui",self)
-        # self.serverwindow=ServerWindow()
-        
         self.saveButton.clicked.connect(self.add_database)
         self.okButton.clicked.connect(self.passinfo)
         

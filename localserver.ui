@@ -11,25 +11,12 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Easy Attendence Management Local Server</string>
+   <string>Attendence Local Server</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: rgb(83, 83, 83)</string>
+   <string notr="true"/>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QLabel" name="label">
-    <property name="geometry">
-     <rect>
-      <x>30</x>
-      <y>10</y>
-      <width>91</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Connected device</string>
-    </property>
-   </widget>
    <widget class="QLabel" name="label_4">
     <property name="geometry">
      <rect>
@@ -43,7 +30,7 @@
      <string>Powerd By rajIT Ltd.</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="syncButton">
+   <widget class="QPushButton" name="RefreshBtn">
     <property name="geometry">
      <rect>
       <x>260</x>
@@ -53,23 +40,35 @@
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(88, 88, 88)</string>
+     <string notr="true"/>
     </property>
     <property name="text">
-     <string>Sync</string>
+     <string>Refresh</string>
     </property>
    </widget>
    <widget class="QTableWidget" name="tableWidget">
     <property name="geometry">
      <rect>
-      <x>30</x>
+      <x>20</x>
       <y>30</y>
-      <width>301</width>
-      <height>321</height>
+      <width>321</width>
+      <height>341</height>
      </rect>
     </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>331</width>
+      <height>16777215</height>
+     </size>
+    </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(159, 159, 159)</string>
+     <string notr="true"/>
     </property>
     <column>
      <property name="text">
@@ -78,12 +77,7 @@
     </column>
     <column>
      <property name="text">
-      <string>Port</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>API</string>
+      <string>Status</string>
      </property>
     </column>
    </widget>
@@ -101,9 +95,9 @@
     <property name="title">
      <string>File</string>
     </property>
+    <addaction name="separator"/>
+    <addaction name="actionStatus"/>
     <addaction name="actionAdd_New"/>
-    <addaction name="actionSave"/>
-    <addaction name="actionSave_As"/>
    </widget>
    <widget class="QMenu" name="menuSetting">
     <property name="title">
@@ -115,7 +109,7 @@
     <property name="title">
      <string>About</string>
     </property>
-    <addaction name="actionVersion_2"/>
+    <addaction name="versionAction"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuSetting"/>
@@ -138,7 +132,7 @@
      <normaloff>fugue-icons-3.5.6/icons/plus-button.png</normaloff>fugue-icons-3.5.6/icons/plus-button.png</iconset>
    </property>
    <property name="text">
-    <string>Add New</string>
+    <string>Add New Device</string>
    </property>
   </action>
   <action name="actionSave">
@@ -150,13 +144,13 @@
     <string>Save</string>
    </property>
   </action>
-  <action name="actionSave_As">
+  <action name="action_list">
    <property name="icon">
     <iconset>
      <normaloff>fugue-icons-3.5.6/icons/document-share.png</normaloff>fugue-icons-3.5.6/icons/document-share.png</iconset>
    </property>
    <property name="text">
-    <string>Save As...</string>
+    <string>Device List</string>
    </property>
   </action>
   <action name="actionConfigaration_2">
@@ -168,13 +162,18 @@
     <string>Configaration</string>
    </property>
   </action>
-  <action name="actionVersion_2">
+  <action name="versionAction">
    <property name="icon">
     <iconset>
      <normaloff>fugue-icons-3.5.6/icons/paper-plane--pencil.png</normaloff>fugue-icons-3.5.6/icons/paper-plane--pencil.png</iconset>
    </property>
    <property name="text">
     <string>Version</string>
+   </property>
+  </action>
+  <action name="actionStatus">
+   <property name="text">
+    <string>Status</string>
    </property>
   </action>
  </widget>

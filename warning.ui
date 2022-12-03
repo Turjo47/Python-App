@@ -11,7 +11,11 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Warning Input</string>
+   <string>Input Warning</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="resources.qrc">
+    <normaloff>:/icon/feather/alert-circle.svg</normaloff>:/icon/feather/alert-circle.svg</iconset>
   </property>
   <widget class="QLabel" name="label">
    <property name="geometry">

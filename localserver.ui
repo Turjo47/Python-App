@@ -6,12 +6,16 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>364</width>
+    <width>342</width>
     <height>437</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Attendence Local Server</string>
+   <string>Device List</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>feather/list.svg</normaloff>feather/list.svg</iconset>
   </property>
   <property name="styleSheet">
    <string notr="true"/>
@@ -33,7 +37,7 @@
    <widget class="QPushButton" name="RefreshBtn">
     <property name="geometry">
      <rect>
-      <x>260</x>
+      <x>240</x>
       <y>0</y>
       <width>75</width>
       <height>23</height>
@@ -51,12 +55,12 @@
      <rect>
       <x>20</x>
       <y>30</y>
-      <width>321</width>
-      <height>341</height>
+      <width>301</width>
+      <height>331</height>
      </rect>
     </property>
     <property name="sizePolicy">
-     <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+     <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
       <horstretch>0</horstretch>
       <verstretch>0</verstretch>
      </sizepolicy>
@@ -87,7 +91,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>364</width>
+     <width>342</width>
      <height>21</height>
     </rect>
    </property>
@@ -96,14 +100,19 @@
      <string>File</string>
     </property>
     <addaction name="separator"/>
-    <addaction name="actionStatus"/>
     <addaction name="actionAdd_New"/>
    </widget>
    <widget class="QMenu" name="menuSetting">
     <property name="title">
      <string>Setting</string>
     </property>
-    <addaction name="actionConfigaration_2"/>
+    <widget class="QMenu" name="menuConfigaration">
+     <property name="title">
+      <string>Configaration</string>
+     </property>
+     <addaction name="actionStatus"/>
+    </widget>
+    <addaction name="menuConfigaration"/>
    </widget>
    <widget class="QMenu" name="menuAbout">
     <property name="title">
@@ -151,15 +160,6 @@
    </property>
    <property name="text">
     <string>Device List</string>
-   </property>
-  </action>
-  <action name="actionConfigaration_2">
-   <property name="icon">
-    <iconset>
-     <normaloff>fugue-icons-3.5.6/icons/hammer-screwdriver.png</normaloff>fugue-icons-3.5.6/icons/hammer-screwdriver.png</iconset>
-   </property>
-   <property name="text">
-    <string>Configaration</string>
    </property>
   </action>
   <action name="versionAction">

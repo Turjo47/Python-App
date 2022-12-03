@@ -1,71 +1,73 @@
-import os
-import sys 
-import sqlite3
-from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import QMainWindow,QApplication,QLabel,QPushButton,QTextBrowser,QMenuBar,QMenu,QAction,QStatusBar,QLineEdit,QWidget,QDialog,QTableWidget,QTableWidgetItem
-from PyQt5.uic import loadUi
-import getDevice
-import get_users
+import sys
+from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class ServerWindow(QMainWindow):
-    def __init__(self):
-        super(ServerWindow,self).__init__()
-        loadUi("localserver.ui",self)
-        self.actionAdd_New.triggered.connect(self.displayinfo)
-        self.syncButton.clicked.connect(self.loaddata)
-        self.displayinfo()
-    def displayinfo(self):
-        widget.setFixedSize(400,180)
-        widget.setCurrentIndex(widget.currentIndex()+1)
-        self.show()
-    def loaddata(self):
-        con = sqlite3.connect('attendence.bd')
-        cur= con.cursor()
-        sqlquery ="SELECT rowid,* FROM infos"
-        self.tableWidget.setRowCount(50)
-        tablerow = 0 
-        for row in cur.execute(sqlquery):
-            self.tableWidget.setItem(tablerow, 1, QtWidgets.QTableWidgetItem(row[1]))
-            self.tableWidget.setItem(tablerow, 2, QtWidgets.QTableWidgetItem(row[2]))
-            self.tableWidget.setItem(tablerow, 3, QtWidgets.QTableWidgetItem(row[3]))
-            tablerow+=1
-            
-class InputWindow(QMainWindow):
-    def __init__(self):
-        super(InputWindow,self).__init__()
-        loadUi("input.ui",self)
-        self.saveButton.clicked.connect(self.add_database)
-        self.okButton.clicked.connect(self.passinfo)
+class LoadTable(QtWidgets.QTableWidget):
+    def __init__(self, parent=None):
+        super(LoadTable, self).__init__(1, 5, parent)
+        self.setFont(QtGui.QFont("Helvetica", 10, QtGui.QFont.Normal, italic=False))   
+        headertitle = ("A","B","C","D","E")
+        self.setHorizontalHeaderLabels(headertitle)
+        self.verticalHeader().hide()
+        self.horizontalHeader().setHighlightSections(False)
+        self.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Fixed)
+
+        self.setSelectionMode(QtWidgets.QAbstractItemView.NoSelection)
+        self.setColumnWidth(0, 130)
         
-    def passinfo(self):
-        widget.setFixedSize(400,450)
-        widget.setCurrentIndex(widget.currentIndex()-1)
-    def add_database(self):
-        ip = self.Ip_lineEdit.text()
-        port =self.Port_lineEdit.text()
-        api =self.Api_lineEdit.text()
-        con = sqlite3.connect('attendence.bd')
-        cur = con.cursor()
-        users= cur.execute('''CREATE TABLE if not exists infos(Ip TEXT ,Port TEXT ,Api TEXT)''')
-        cur.execute("INSERT INTO infos (Ip,Port,Api) VALUES(?,?,?)",(ip,port,api))
-        con.commit()
-        con.close
-    
-        
-if __name__ == '__main__':        
-#main
-    app = QApplication(sys.argv)
-    widget= QtWidgets.QStackedWidget()
-    serverwindow = ServerWindow()
-    inputwindow = InputWindow()
-    widget.addWidget(serverwindow)
-    widget.addWidget(inputwindow)
-    widget.setFixedSize(400,450)
-    widget.show()
+        delete_button = QtWidgets.QPushButton("Delete")
+        delete_button.clicked.connect(self.loadTable._removerow)
+        self.setCellWidget(0, 4, delete_button)
 
-    try:
-        sys.exit(app.exec_())
-    except:
-        print("Exiting")
-    
+        self.cellChanged.connect(self._cellclicked)
+
+    @QtCore.pyqtSlot(int, int)
+    def _cellclicked(self, r, c):
+        it = self.item(r, c)
+        it.setTextAlignment(QtCore.Qt.AlignCenter)        
+
+    @QtCore.pyqtSlot()
+    def _addrow(self):
+        rowcount = self.rowCount()
+        self.insertRow(rowcount)
+        combox_add = QtWidgets.QPushButton(self)
+        combox_add.addAction(["I","II"])
+        self.setCellWidget(rowcount, 4, combox_add)
+
+    @QtCore.pyqtSlot()
+    def _removerow(self):
+        if self.rowCount() > 0:
+            self.removeRow(self.rowCount()-1)
+
+
+class ThirdTabLoads(QtWidgets.QWidget):
+    def __init__(self, parent=None):
+        super(ThirdTabLoads, self).__init__(parent)    
+
+        table = LoadTable()
+
+        add_button = QtWidgets.QPushButton("Add")
+        add_button.clicked.connect(table._addrow)
+
+        delete_button = QtWidgets.QPushButton("Delete")
+        delete_button.clicked.connect(table._removerow)
+
+        button_layout = QtWidgets.QVBoxLayout()
+        button_layout.addWidget(add_button, alignment=QtCore.Qt.AlignBottom)
+        button_layout.addWidget(delete_button, alignment=QtCore.Qt.AlignTop)
+
+
+        tablehbox = QtWidgets.QHBoxLayout()
+        tablehbox.setContentsMargins(10, 10, 10, 10)
+        tablehbox.addWidget(table)
+
+        grid = QtWidgets.QGridLayout(self)
+        grid.addLayout(button_layout, 0, 1)
+        grid.addLayout(tablehbox, 0, 0)        
+
+
+if __name__ == '__main__':
+    app = QtWidgets.QApplication(sys.argv)
+    w = ThirdTabLoads()
+    w.show()
+    sys.exit(app.exec_())

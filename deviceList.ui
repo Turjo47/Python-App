@@ -47,11 +47,6 @@
       <string>Status</string>
      </property>
     </column>
-    <column>
-     <property name="text">
-      <string>Edit</string>
-     </property>
-    </column>
    </widget>
    <widget class="QPushButton" name="closebtn">
     <property name="geometry">
@@ -77,6 +72,19 @@
     </property>
     <property name="text">
      <string>Powerd By rajIT Ltd.</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="deletebtn">
+    <property name="geometry">
+     <rect>
+      <x>370</x>
+      <y>360</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Delete</string>
     </property>
    </widget>
   </widget>

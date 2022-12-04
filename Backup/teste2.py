@@ -11,6 +11,7 @@ class ServerWindow(QMainWindow):
     def __init__(self):
         super(ServerWindow,self).__init__()
         loadUi("localserver.ui",self)
+        
         self.tableWidget.setColumnWidth(0,150)
         self.tableWidget.setColumnWidth(1,150)
         self.loaddata()
@@ -21,13 +22,11 @@ class ServerWindow(QMainWindow):
         # self.displayinfo()
         # self.dlist()
     def loaddata(self):
-        # ip = self.Ip_lineEdit.text()
-        # port =self.Port_lineEdit.text()
-        con = sqlite3.connect('attendence.bd')
-        cur = con.cursor()
-        users= cur.execute('''CREATE TABLE if not exists infos(Ip TEXT ,Port TEXT, Api Text, Status Integer )''')
+       
         con = sqlite3.connect('attendence.bd')
         cur= con.cursor()
+        users= cur.execute('''CREATE TABLE if not exists infos(Ip TEXT ,Port TEXT, Api Text, Status Integer)''')
+        
         sqlquery ="SELECT Ip FROM infos"
         self.tableWidget.setRowCount(50)
         tablerow = 0 
@@ -40,8 +39,10 @@ class ServerWindow(QMainWindow):
         widget.setCurrentIndex(widget.currentIndex()+1)
         
     def dlist(self):
-        self.status=  Devicelist()
-        self.status.status()
+        
+        self.devicelist=Devicelist()
+        self.devicelist.status()
+        self.loaddata()
         widget.setFixedSize(554,436)
         widget.setCurrentIndex(widget.currentIndex()+2)
     # def delete(self):
@@ -59,13 +60,11 @@ class InputWindow(QMainWindow):
     def __init__(self):
         super(InputWindow,self).__init__()
         loadUi("input.ui",self)
-        
         self.saveButton.clicked.connect(self.add_database)
         self.okButton.clicked.connect(self.passinfo)
-
-        
-    
+        self.serevrwindow = ServerWindow()
     def passinfo(self):
+        serverwindow.loaddata()
         widget.setFixedSize(342,437)
         widget.setCurrentIndex(widget.currentIndex()-1)
         
@@ -86,14 +85,36 @@ class InputWindow(QMainWindow):
 class Devicelist(QMainWindow):
     def __init__(self):
         super(Devicelist,self).__init__()
-        loadUi("deviceList.ui",self)  
+        loadUi("deviceList.ui",self)
         self.status()
+        # self.show()
         self.closebtn.clicked.connect(self.close)
-        self.show()
+        self.deletebtn.clicked.connect(self.dlt)
+        self.serverwindow= ServerWindow()
+        # self.show()
+    def dlt(self):
+        
+        con = sqlite3.connect('attendence.bd')
+        cur=con.cursor()
+        dltquery="SELECT * FROM infos"
+        res = cur.execute(dltquery)
+        for row in enumerate(res):
+            if row[0]==self.tableWidget.currentRow():
+                id   = row[1]
+                ip   = id[0]
+                port = id[1]
+                api  = id[2]
+                cur.execute("DELETE FROM infos WHERE Ip=? AND Port=? AND Api=?",(ip,port,api))
+                con.commit()
+                
+        # infos WHERE IP=? AND Port=? AND Api=?",(id,port,api,))        
+        self.tableWidget.removeRow(self.tableWidget.currentRow())
     def close(self):
+        # serverwindow.loaddata()
         widget.setFixedSize(380,450)
         widget.setCurrentIndex(widget.currentIndex()-2)
     def status(self):
+        # serverwindow.loaddata()
         con = sqlite3.connect('attendence.bd')
         cur= con.cursor()
         sqlquery ="SELECT * FROM infos"
@@ -104,7 +125,6 @@ class Devicelist(QMainWindow):
             self.tableWidget.setItem(tablerow,1,QtWidgets.QTableWidgetItem(row[1]))
             self.tableWidget.setItem(tablerow,2,QtWidgets.QTableWidgetItem(row[2]))
             self.tableWidget.setItem(tablerow,3,QtWidgets.QTableWidgetItem(row[3]))
-            # self.tableWidget.setItem(tablerow,4,QtWidgets.QPushButton(row[4]))
             tablerow+=1
 # class Version(QMainWindow):
 #     def __init__(self):
